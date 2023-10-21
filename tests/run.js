@@ -17,7 +17,12 @@ function exec() {
 
 // exec();
 
-const tests = [require('./literal-test'), require('./statement-test'), require('./block-test')];
+const tests = [
+    require('./literal-test'),
+    require('./statement-test'),
+    require('./block-test'),
+    require('./empty-test')
+];
 
 function test(program, expected) {
     const ast = parser.parse(program);
