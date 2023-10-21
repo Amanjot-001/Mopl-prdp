@@ -4,6 +4,11 @@ class Tokenizer {
         this._cursor = 0;
     }
 
+    // end of file or not
+    isEOF() {
+        return this._cursor === this._string.length;
+    }
+
     hasMoreTokens() {
        return this._cursor < this._string.length;
     }
@@ -15,6 +20,7 @@ class Tokenizer {
 
         const string = this._string.slice(this._cursor);
 
+        // numbers
         if(!Number.isNaN(Number(string[0]))) {
             let number = '';
             while(!Number.isNaN(Number(string[this._cursor]))) {
@@ -26,6 +32,23 @@ class Tokenizer {
                 value: number
             };
         }
+
+        // strings
+        if(string[0] === '"') {
+            let str = '';
+            do {
+                str+= string[this._cursor++];
+            } while(string[this._cursor] !== '"' && !this._EOF());
+
+            str+= this._cursor++;
+            
+            return {
+                type: 'STRING',
+                value: str
+            }
+        }
+
+        return null;
     }
 }
 
