@@ -1,3 +1,9 @@
+const Spec = [
+    [/^\d+/, 'NUMBER'],
+    [/^"[^"]*"/, 'STRING'],
+    [/^'[^']*'/, 'STRING']
+]
+
 class Tokenizer {
     init(string) {
         this._string = string;
@@ -20,39 +26,29 @@ class Tokenizer {
 
         const string = this._string.slice(this._cursor);
 
-        // numbers
-        let matched = /^\d+/.exec(string);
-        if(matched !== null) {
-            this._cursor += matched[0].length;
+        for(const [regex, tokenType] of Spec) {
+            const tokenValue = this._match(regex, string);
 
+            if(tokenValue == null)
+                continue;
+            
             return {
-                type: 'NUMBER',
-                value: matched[0]
+                type: tokenType,
+                value: tokenValue
             };
         }
 
-        // strings
-        matched = /^"[^"]*"/.exec(string);
-        if(matched !== null) {
-            this._cursor += matched[0].length;
+        throw new SyntaxError(`Unexpected token: "${string[0]}"`);
+    }
 
-            return {
-                type: 'STRING',
-                value: matched[0]
-            }
+    _match(regex, string) {
+        const matched = regex.exec(string);
+        if(matched == null) {
+            return null;
         }
+        this._cursor += matched[0].length;
 
-        matched = /^'[^']*'/.exec(string);
-        if(string[0] === "'") {
-            this._cursor += matched[0].length;
-
-            return {
-                type: 'STRING',
-                value: matched[0]
-            }
-        }
-
-        return null;
+        return matched[0];
     }
 }
 
