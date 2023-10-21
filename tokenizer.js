@@ -21,43 +21,34 @@ class Tokenizer {
         const string = this._string.slice(this._cursor);
 
         // numbers
-        if(!Number.isNaN(Number(string[0]))) {
-            let number = '';
-            while(!Number.isNaN(Number(string[this._cursor]))) {
-                number+=string[this._cursor++];
-            }
+        let matched = /^\d+/.exec(string);
+        if(matched !== null) {
+            this._cursor += matched[0].length;
 
             return {
                 type: 'NUMBER',
-                value: number
+                value: matched[0]
             };
         }
 
         // strings
-        if(string[0] === '"') {
-            let str = '';
-            do {
-                str+= string[this._cursor++];
-            } while(string[this._cursor] !== '"' && !this._isEOF());
+        matched = /^"[^"]*"/.exec(string);
+        if(matched !== null) {
+            this._cursor += matched[0].length;
 
-            str+= this._cursor++;
-            
             return {
                 type: 'STRING',
-                value: str
+                value: matched[0]
             }
         }
-        else if(string[0] === "'") {
-            let str = '';
-            do {
-                str+= string[this._cursor++];
-            } while(string[this._cursor] !== "'" && !this._isEOF());
 
-            str+= this._cursor++;
+        matched = /^'[^']*'/.exec(string);
+        if(string[0] === "'") {
+            this._cursor += matched[0].length;
 
             return {
                 type: 'STRING',
-                value: str
+                value: matched[0]
             }
         }
 
