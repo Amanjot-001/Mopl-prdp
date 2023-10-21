@@ -5,7 +5,7 @@ class Tokenizer {
     }
 
     // end of file or not
-    isEOF() {
+    _isEOF() {
         return this._cursor === this._string.length;
     }
 
@@ -38,7 +38,7 @@ class Tokenizer {
             let str = '';
             do {
                 str+= string[this._cursor++];
-            } while(string[this._cursor] !== '"' && !this._EOF());
+            } while(string[this._cursor] !== '"' && !this._isEOF());
 
             str+= this._cursor++;
             
