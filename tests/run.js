@@ -17,7 +17,7 @@ function exec() {
 
 // exec();
 
-const tests = [require('./literal-test')];
+const tests = [require('./literal-test'), require('./statement-test')];
 
 function test(program, expected) {
     const ast = parser.parse(program);
