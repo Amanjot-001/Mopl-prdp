@@ -2,7 +2,12 @@ const Spec = [
     [/^\d+/, 'NUMBER'],
     [/^"[^"]*"/, 'STRING'],
     [/^'[^']*'/, 'STRING'],
-    [/^\s+/, null]
+
+    // whitespaces
+    [/^\s+/, null],
+
+    // comments
+    [/^\/\/.*/, null],
 ]
 
 class Tokenizer {
