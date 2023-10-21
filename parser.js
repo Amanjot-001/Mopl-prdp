@@ -11,7 +11,10 @@ class Parser {
 
     // main entry point
     program() {
-        return this.NumericLiteral();
+        return {
+            type: 'Program',
+            body: this.NumericLiteral()
+        };
     }
 
     NumericLiteral() {
@@ -22,6 +25,6 @@ class Parser {
     }
 }
 
-module.export = {
+module.exports = {
     Parser
 };
