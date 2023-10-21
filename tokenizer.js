@@ -11,6 +11,9 @@ const Spec = [
 
     //multiline comments
     [/^\/\*[\s\S]*?\*\//, null],
+
+    //semicolon
+    [/^;/, ';']
 ]
 
 class Tokenizer {

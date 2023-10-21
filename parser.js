@@ -19,8 +19,36 @@ class Parser {
     program() {
         return {
             type: 'Program',
-            body: this.Literal()
+            body: this.StatementList()
         };
+    }
+
+    StatementList() {
+        const statmentList = [this.Statement()];
+
+        // to avoid left recursion
+        while(this._lookahead != null) {
+            statmentList.push(this.Statement())
+        }
+
+        return statmentList;
+    }
+
+    Statement() {
+        return this.ExpressionStatement();
+    }
+
+    ExpressionStatement() {
+        const expression = this.Expression();
+        this._eat(';');
+        return {
+            type: 'ExpressionStatement',
+            expression
+        }
+    }
+
+    Expression() {
+        return this.Literal();
     }
 
     Literal() {
@@ -57,7 +85,7 @@ class Parser {
 
         if(token == null) {
             throw new SyntaxError(
-                `Unexpected end of input, expected: "${tokenType}` 
+                `Unexpected end of input, expected: "${tokenType}"` 
             );
         }
 

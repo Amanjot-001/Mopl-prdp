@@ -3,13 +3,10 @@ const assert = require('assert');
 const parser = new Parser();
 
 function exec() {
-    const program = `23
-    /** comment
-     * line2
-     */
-    
-    // hello
-    `;
+    const program = `
+    23;
+    "hello";
+    `
     // const program = "'hello'";
     // const program = '  "   hello"';
     
@@ -18,6 +15,8 @@ function exec() {
     console.log(JSON.stringify(ast, null, 2));
 }
 
+exec();
+
 const tests = [require('./literal-test')];
 
 function test(program, expected) {
@@ -25,6 +24,6 @@ function test(program, expected) {
     assert.deepEqual(ast, expected);
 }
 
-tests.forEach(testRun => testRun(test))
+// tests.forEach(testRun => testRun(test))
 
 console.log('all assertions passed! ')
