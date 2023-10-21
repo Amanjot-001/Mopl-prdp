@@ -23,11 +23,11 @@ class Parser {
         };
     }
 
-    StatementList() {
+    StatementList(stopLookAhead = null) {
         const statmentList = [this.Statement()];
 
         // to avoid left recursion
-        while(this._lookahead != null) {
+        while(this._lookahead != null && this._lookahead.type !== stopLookAhead) {
             statmentList.push(this.Statement())
         }
 
@@ -44,7 +44,15 @@ class Parser {
     }
 
     BlockStatement() {
-        
+        this._eat('{');
+        const body = this._lookahead.type !== '}' ? this.StatementList('}') : [];
+
+        this._eat('}');
+
+        return {
+            type: 'BlockStatement',
+            body
+        };
     }
 
     ExpressionStatement() {

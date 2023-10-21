@@ -13,11 +13,11 @@ const Spec = [
     [/^\/\*[\s\S]*?\*\//, null],
 
     //semicolon
-    [/^;/, ';']
+    [/^;/, ';'],
 
     // curly braces
     [/^\{/, '{'],
-    [/^\}/, '}']
+    [/^\}/, '}'],
 ]
 
 class Tokenizer {
