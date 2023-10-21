@@ -8,6 +8,9 @@ const Spec = [
 
     // comments
     [/^\/\/.*/, null],
+
+    //multiline comments
+    [/^\/\*[\s\S]*?\*\//, null],
 ]
 
 class Tokenizer {
