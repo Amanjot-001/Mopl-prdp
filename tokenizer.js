@@ -47,6 +47,19 @@ class Tokenizer {
                 value: str
             }
         }
+        else if(string[0] === "'") {
+            let str = '';
+            do {
+                str+= string[this._cursor++];
+            } while(string[this._cursor] !== "'" && !this._isEOF());
+
+            str+= this._cursor++;
+
+            return {
+                type: 'STRING',
+                value: str
+            }
+        }
 
         return null;
     }
