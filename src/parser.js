@@ -145,14 +145,14 @@ class Parser {
     AdditiveExpression() {
         return this._BinaryExpression(
             'MultiplicativeExpression',
-            'Additive_Operator'
+            'ADDITIVE_OPERATOR'
         );
     }
 
     MultiplicativeExpression() {
         return this._BinaryExpression(
             'PrimaryExpression',
-            'Multiplicative_Operator'
+            'MULTIPLICATIVE_OPERATOR'
         );
     }
 

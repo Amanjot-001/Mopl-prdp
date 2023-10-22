@@ -20,14 +20,21 @@ const Spec = [
     [/^\}/, '}'],
 
     // + and -
-    [/^[+\-]/, 'Additive_Operator'],
+    [/^[+\-]/, 'ADDITIVE_OPERATOR'],
 
     // *
-    [/^[*\/]/, 'Multiplicative_Operator'],
+    [/^[*\/]/, 'MULTIPLICATIVE_OPERATOR'],
 
     // parenthesis
     [/^\(/, '('],
     [/^\)/, ')'],
+
+    //identifiers
+    [/^\w+/, 'IDENTIFIER'],
+
+    // assignment operators = , *= , += , -= , /=
+    [/^=/, 'SIMPLE_ASSIGN'],
+    [/^[\*\/\+\-]=/, 'COMPLEX_ASSIGN'],
 ]
 
 class Tokenizer {
