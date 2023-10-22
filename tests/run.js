@@ -1,4 +1,4 @@
-const {Parser} = require('../parser');
+const {Parser} = require('../src/parser');
 const assert = require('assert');
 const parser = new Parser();
 
