@@ -1,5 +1,25 @@
 const {Tokenizer} = require('./tokenizer');
 
+const DefaultFactory = {
+    Program(body) {
+        return {
+            type: 'Program',
+            body
+        };
+    },
+
+}
+
+const SExpressionFactory = {
+    Program(body) {
+        return ['begin', body];
+    }
+}
+
+const AST_MODE = 'default';
+
+const factory = AST_MODE === 'default' ? DefaultFactory : SExpressionFactory;
+
 class Parser {
     constructor() {
         this._string = '';
