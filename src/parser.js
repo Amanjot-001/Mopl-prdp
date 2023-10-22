@@ -135,7 +135,29 @@ class Parser {
     }
 
     Expression() {
-        return this.Literal();
+        return this.AdditiveExpression();
+    }
+
+    // no left recursion
+    // Additive has lower precedence than literal
+    // lower the precedence closer to the program
+    // for + and -
+    AdditiveExpression() {
+        let left = this.Literal();
+
+        while(this._lookahead.type === 'Additive_Operator') {
+            const operator = this._eat('Additive_Operator').value;
+            const right = this.Literal();
+        }
+
+        left = {
+          type: 'BinaryExpression',
+          operator,
+          left,
+          right
+        }
+
+        return left;
     }
 
     Literal() {

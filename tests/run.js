@@ -21,7 +21,8 @@ const tests = [
     require('./literal-test'),
     require('./statement-test'),
     require('./block-test'),
-    require('./empty-test')
+    require('./empty-test'),
+    require('./math-test')
 ];
 
 function test(program, expected) {

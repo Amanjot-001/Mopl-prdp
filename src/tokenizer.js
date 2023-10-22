@@ -18,6 +18,9 @@ const Spec = [
     // curly braces
     [/^\{/, '{'],
     [/^\}/, '}'],
+
+    // + and -
+    [/^[+\-]/, 'Additive_Operator'],
 ]
 
 class Tokenizer {
