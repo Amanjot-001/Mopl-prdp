@@ -148,13 +148,13 @@ class Parser {
         while(this._lookahead.type === 'Additive_Operator') {
             const operator = this._eat('Additive_Operator').value;
             const right = this.Literal();
-        }
 
-        left = {
-          type: 'BinaryExpression',
-          operator,
-          left,
-          right
+            left = {
+                type: 'BinaryExpression',
+                operator,
+                left,
+                right
+            }
         }
 
         return left;
