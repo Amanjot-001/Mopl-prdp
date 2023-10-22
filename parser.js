@@ -8,15 +8,66 @@ const DefaultFactory = {
         };
     },
 
+    EmptyStatement() {
+        return {
+            type: 'EmptyStatement'
+        };
+    },
+
+    BlockStatement(body) {
+        return {
+            type: 'BlockStatement',
+            body,
+        }
+    },
+
+    ExpressionStatement(expression) {
+        return {
+            type: 'ExpressionStatement',
+            expression
+        };
+    },
+
+    NumericLiteral(value) {
+        return {
+            type: 'NumericLiteral',
+            value
+        };
+    },
+
+    StringLiteral(value) {
+        return {
+            type: 'StringLiteral',
+            value
+        };
+    },
 }
 
 const SExpressionFactory = {
     Program(body) {
         return ['begin', body];
-    }
+    },
+
+    EmptyStatement() {},
+
+    BlockStatement(body) {
+        return ['begin', body];
+    },
+
+    ExpressionStatement(expression) {
+        return expression;
+    },
+
+    NumericLiteral(value) {
+        return value;
+    },
+
+    StringLiteral(value) {
+        return `${value}`;
+    },
 }
 
-const AST_MODE = 'default';
+const AST_MODE = 'se';
 
 const factory = AST_MODE === 'default' ? DefaultFactory : SExpressionFactory;
 
@@ -37,21 +88,18 @@ class Parser {
 
     // main entry point
     program() {
-        return {
-            type: 'Program',
-            body: this.StatementList()
-        };
+        return factory.Program(this.StatementList());
     }
 
     StatementList(stopLookAhead = null) {
-        const statmentList = [this.Statement()];
+        const statementList = [this.Statement()];
 
         // to avoid left recursion
         while(this._lookahead != null && this._lookahead.type !== stopLookAhead) {
-            statmentList.push(this.Statement())
+            statementList.push(this.Statement())
         }
 
-        return statmentList;
+        return statementList;
     }
 
     Statement() {
@@ -67,30 +115,23 @@ class Parser {
 
     EmptyStatement() {
         this._eat(';');
-        return {
-            type: 'EmptyStatement'
-        }
+
+        return factory.EmptyStatement();
     }
 
     BlockStatement() {
         this._eat('{');
         const body = this._lookahead.type !== '}' ? this.StatementList('}') : [];
-
         this._eat('}');
 
-        return {
-            type: 'BlockStatement',
-            body
-        };
+        return factory.BlockStatement(body);
     }
 
     ExpressionStatement() {
         const expression = this.Expression();
         this._eat(';');
-        return {
-            type: 'ExpressionStatement',
-            expression
-        }
+
+        return factory.ExpressionStatement(expression);
     }
 
     Expression() {
@@ -111,19 +152,14 @@ class Parser {
 
     NumericLiteral() {
         const token = this._eat('NUMBER');
-        return {
-            type: 'NumericLiteral',
-            value: Number(token.value)
-        };
+
+        return factory.NumericLiteral(Number(token.value));
     }
 
     StringLiteral() {
         const token = this._eat('STRING');
 
-        return {
-            type: 'StringLiteral',
-            value: token.value.slice(1, -1) // slicing the quotes
-        };
+        return factory.StringLiteral(token.value.slice(1, -1));
     }
 
     _eat(tokenType) {
