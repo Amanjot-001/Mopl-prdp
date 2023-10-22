@@ -4,7 +4,7 @@ const parser = new Parser();
 
 function exec() {
     const program = `
-    2 * 2 * 2;
+    (23) ;
     `
     // const program = "'hello'";
     // const program = '  "   hello"';
@@ -14,7 +14,7 @@ function exec() {
     console.log(JSON.stringify(ast, null, 2));
 }
 
-exec();
+// exec();
 
 const tests = [
     require('./literal-test'),

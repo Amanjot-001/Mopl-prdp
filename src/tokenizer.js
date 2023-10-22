@@ -24,6 +24,10 @@ const Spec = [
 
     // *
     [/^[*\/]/, 'Multiplicative_Operator'],
+
+    // parenthesis
+    [/^\(/, '('],
+    [/^\)/, ')'],
 ]
 
 class Tokenizer {
