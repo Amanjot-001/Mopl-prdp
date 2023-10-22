@@ -143,11 +143,11 @@ class Parser {
     // lower the precedence closer to the program
     // for + and -
     AdditiveExpression() {
-        let left = this.Literal();
+        let left = this.MultiplicativeExpression();
 
         while(this._lookahead.type === 'Additive_Operator') {
             const operator = this._eat('Additive_Operator').value;
-            const right = this.Literal();
+            const right = this.MultiplicativeExpression();
 
             left = {
                 type: 'BinaryExpression',
@@ -158,6 +158,28 @@ class Parser {
         }
 
         return left;
+    }
+
+    MultiplicativeExpression() {
+        let left = this.PrimaryExpression();
+
+        while(this._lookahead.type === 'Multiplicative_Operator') {
+            const operator = this._eat('Multiplicative_Operator').value;
+            const right = this.PrimaryExpression();
+
+            left = {
+                type: 'BinaryExpression',
+                operator,
+                left,
+                right
+            }
+        }
+
+        return left;
+    }
+
+    PrimaryExpression() {
+        return this.Literal();
     }
 
     Literal() {
