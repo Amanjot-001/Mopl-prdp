@@ -1,7 +1,4 @@
 const Spec = [
-    [/^\d+/, 'NUMBER'],
-    [/^"[^"]*"/, 'STRING'],
-    [/^'[^']*'/, 'STRING'],
 
     // whitespaces
     [/^\s+/, null],
@@ -19,19 +16,30 @@ const Spec = [
     [/^\{/, '{'],
     [/^\}/, '}'],
 
-    // *
-    [/^[*\/]/, 'MULTIPLICATIVE_OPERATOR'],
-
     // parenthesis
     [/^\(/, '('],
     [/^\)/, ')'],
 
+    // comma 
+    [/^,/, ','],
+
+    // keywords
+    [/^\blet\b/, 'let'],  // only let as whole word not part of other '/b'
+
+    [/^\d+/, 'NUMBER'],
+    [/^"[^"]*"/, 'STRING'],
+    [/^'[^']*'/, 'STRING'],
+
+    
     //identifiers ... also includes numbers so its below
     [/^\w+/, 'IDENTIFIER'],
 
     // assignment operators = , *= , += , -= , /=
     [/^=/, 'SIMPLE_ASSIGN'],
     [/^[\*\/\+\-]=/, 'COMPLEX_ASSIGN'],
+    
+    // *
+    [/^[*\/]/, 'MULTIPLICATIVE_OPERATOR'],
 
     // + and -
     [/^[+\-]/, 'ADDITIVE_OPERATOR'],
