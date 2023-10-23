@@ -28,7 +28,7 @@ const Spec = [
     [/^\bif\b/, 'if'],
     [/^\belse\b/, 'else'],
     [/^\btrue\b/, 'true'],
-    [/^\false\b/, 'false'],
+    [/^\bfalse\b/, 'false'],
     [/^\bnull\b/, 'null'],
 
     [/^\d+/, 'NUMBER'],

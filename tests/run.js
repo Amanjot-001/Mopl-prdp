@@ -4,7 +4,7 @@ const parser = new Parser();
 
 function exec() {
     const program = `
-    x + 5 > 10 == true;
+    x + 5 > 10 == false;
     `
     // const program = "'hello'";
     // const program = '  "   hello"';
@@ -14,7 +14,7 @@ function exec() {
     console.log(JSON.stringify(ast, null, 2));
 }
 
-exec();
+// exec();
 
 const tests = [
     require('./literal-test'),
@@ -25,7 +25,8 @@ const tests = [
     require('./assign-test'),
     require('./variable-test'),
     require('./if-test'),
-    require('./realational-test')
+    require('./realational-test'),
+    require('./equality-test')
 ];
 
 function test(program, expected) {
