@@ -202,7 +202,7 @@ class Parser {
     }
 
     AssignmentExpression() {
-        const left = this.RelationalExpression();
+        const left = this.EqualityExpression();
 
         if(!this._isAssignmentOperator(this._lookahead.type))
             return left;
@@ -220,6 +220,10 @@ class Parser {
             return this._eat('SIMPLE_ASSIGN');
         
         return this._eat('COMPLEX_ASSIGN');
+    }
+
+    EqualityExpression() {
+        return this._BinaryExpression('RelationalExpression', 'EQUALITY_OPERATOR')
     }
 
     RelationalExpression() {

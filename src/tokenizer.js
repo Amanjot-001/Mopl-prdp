@@ -27,6 +27,9 @@ const Spec = [
     [/^\blet\b/, 'let'],  // only let as whole word not part of other '/b'
     [/^\bif\b/, 'if'],
     [/^\belse\b/, 'else'],
+    [/^\btrue\b/, 'true'],
+    [/^\false\b/, 'false'],
+    [/^\bnull\b/, 'null'],
 
     [/^\d+/, 'NUMBER'],
     [/^"[^"]*"/, 'STRING'],
@@ -35,6 +38,9 @@ const Spec = [
     
     //identifiers ... also includes numbers so its below
     [/^\w+/, 'IDENTIFIER'],
+
+    //equality
+    [/^[=!]=/, 'EQUALITY_OPERATOR'],
 
     // assignment operators = , *= , += , -= , /=
     [/^=/, 'SIMPLE_ASSIGN'],
@@ -47,7 +53,7 @@ const Spec = [
     [/^[+\-]/, 'ADDITIVE_OPERATOR'],
 
     // realtional operators
-    [/^[><]=?/, 'RELATIONAL_OPERATOR'],
+    [/^[><]=?/, 'RELATIONAL_OPERATOR'], 
 
 ]
 

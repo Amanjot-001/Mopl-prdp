@@ -4,7 +4,7 @@ const parser = new Parser();
 
 function exec() {
     const program = `
-    x + 5 > 10;
+    x + 5 > 10 == true;
     `
     // const program = "'hello'";
     // const program = '  "   hello"';
