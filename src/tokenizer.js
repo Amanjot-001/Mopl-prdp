@@ -19,9 +19,6 @@ const Spec = [
     [/^\{/, '{'],
     [/^\}/, '}'],
 
-    // + and -
-    [/^[+\-]/, 'ADDITIVE_OPERATOR'],
-
     // *
     [/^[*\/]/, 'MULTIPLICATIVE_OPERATOR'],
 
@@ -35,6 +32,10 @@ const Spec = [
     // assignment operators = , *= , += , -= , /=
     [/^=/, 'SIMPLE_ASSIGN'],
     [/^[\*\/\+\-]=/, 'COMPLEX_ASSIGN'],
+
+    // + and -
+    [/^[+\-]/, 'ADDITIVE_OPERATOR'],
+
 ]
 
 class Tokenizer {
