@@ -28,7 +28,7 @@ const Spec = [
     [/^\bif\b/, 'if'],
     [/^\belse\b/, 'else'],
     [/^\btrue\b/, 'true'],
-    [/^\bfalse\b/, 'false'],
+    [/^\bfalse\b/, 'false'], 
     [/^\bnull\b/, 'null'],
 
     [/^\d+/, 'NUMBER'],
@@ -54,6 +54,10 @@ const Spec = [
 
     // realtional operators
     [/^[><]=?/, 'RELATIONAL_OPERATOR'], 
+
+    // logical operators
+    [/^&&/, 'LOGICAL_AND'],
+    [/^\|\|/, 'LOGICAL_OR'],
 
 ]
 

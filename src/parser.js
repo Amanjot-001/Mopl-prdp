@@ -202,7 +202,7 @@ class Parser {
     }
 
     AssignmentExpression() {
-        const left = this.EqualityExpression();
+        const left = this.LogicalORExpression();
 
         if(!this._isAssignmentOperator(this._lookahead.type))
             return left;
@@ -220,6 +220,14 @@ class Parser {
             return this._eat('SIMPLE_ASSIGN');
         
         return this._eat('COMPLEX_ASSIGN');
+    }
+
+    LogicalORExpression() {
+        return this._LogicalExpression('LogicalANDExpression', 'LOGICAL_OR');
+    }
+
+    LogicalANDExpression() {
+        return this._LogicalExpression('EqualityExpression', 'LOGICAL_AND');
     }
 
     EqualityExpression() {
@@ -271,6 +279,24 @@ class Parser {
             'PrimaryExpression',
             'MULTIPLICATIVE_OPERATOR'
         );
+    }
+
+    _LogicalExpression(builderName, operatorToken) {
+        let left = this[builderName]();
+
+        while(this._lookahead.type === operatorToken) {
+            const operator = this._eat(operatorToken).value;
+
+            const right = this[builderName]();
+
+            left = {
+                type: 'LogicalExpression',
+                operator,
+                left,
+                right
+            };
+        }
+        return left;
     }
 
     _BinaryExpression(builderName, operatorToken) {

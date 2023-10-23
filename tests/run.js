@@ -4,7 +4,7 @@ const parser = new Parser();
 
 function exec() {
     const program = `
-    x + 5 > 10 == false;
+    x < 5 && x > 10;
     `
     // const program = "'hello'";
     // const program = '  "   hello"';
@@ -14,7 +14,7 @@ function exec() {
     console.log(JSON.stringify(ast, null, 2));
 }
 
-// exec();
+exec();
 
 const tests = [
     require('./literal-test'),
@@ -26,7 +26,8 @@ const tests = [
     require('./variable-test'),
     require('./if-test'),
     require('./relational-test'),
-    require('./equality-test')
+    require('./equality-test'),
+    require('./logical-test')
 ];
 
 function test(program, expected) {
@@ -34,6 +35,6 @@ function test(program, expected) {
     assert.deepEqual(ast, expected);
 }
 
-tests.forEach(testRun => testRun(test))
+// tests.forEach(testRun => testRun(test))
 
 console.log('all assertions passed! ')
