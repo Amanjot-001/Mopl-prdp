@@ -25,7 +25,7 @@ const tests = [
     require('./assign-test'),
     require('./variable-test'),
     require('./if-test'),
-    require('./realational-test'),
+    require('./relational-test'),
     require('./equality-test')
 ];
 
