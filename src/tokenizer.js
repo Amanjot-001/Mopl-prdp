@@ -46,6 +46,9 @@ const Spec = [
     // + and -
     [/^[+\-]/, 'ADDITIVE_OPERATOR'],
 
+    // realtional operators
+    [/^[><]=?/, 'RELATIONAL_OPERATOR'],
+
 ]
 
 class Tokenizer {

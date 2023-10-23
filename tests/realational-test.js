@@ -1,4 +1,4 @@
-module.exports = tes => {
+module.exports = test => {
     test(`x>0;`, {
         type: 'Program',
         body: [
