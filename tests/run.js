@@ -23,7 +23,8 @@ const tests = [
     require('./empty-test'),
     require('./math-test'),
     require('./assign-test'),
-    require('./variable-test')
+    require('./variable-test'),
+    require('./if-test')
 ];
 
 function test(program, expected) {

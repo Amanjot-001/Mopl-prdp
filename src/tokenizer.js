@@ -25,6 +25,8 @@ const Spec = [
 
     // keywords
     [/^\blet\b/, 'let'],  // only let as whole word not part of other '/b'
+    [/^\bif\b/, 'if'],
+    [/^\belse\b/, 'else'],
 
     [/^\d+/, 'NUMBER'],
     [/^"[^"]*"/, 'STRING'],

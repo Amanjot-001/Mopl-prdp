@@ -110,6 +110,8 @@ class Parser {
                 return  this.BlockStatement();
             case 'let':
                 return this.VariableStatement();
+            case 'if':
+                return this.IfStatement();
             default :
                 return this.ExpressionStatement();
         }
