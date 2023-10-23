@@ -4,7 +4,9 @@ const parser = new Parser();
 
 function exec() {
     const program = `
-    let x = 1;
+    if(x) {
+        x = 1;
+    }
     `
     // const program = "'hello'";
     // const program = '  "   hello"';
