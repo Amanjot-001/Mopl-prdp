@@ -4,7 +4,7 @@ const parser = new Parser();
 
 function exec() {
     const program = `
-    (23) ;
+    x = y;
     `
     // const program = "'hello'";
     // const program = '  "   hello"';

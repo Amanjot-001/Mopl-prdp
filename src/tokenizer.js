@@ -29,7 +29,7 @@ const Spec = [
     [/^\(/, '('],
     [/^\)/, ')'],
 
-    //identifiers
+    //identifiers ... also includes numbers so its below
     [/^\w+/, 'IDENTIFIER'],
 
     // assignment operators = , *= , += , -= , /=
