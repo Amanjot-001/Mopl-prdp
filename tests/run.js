@@ -4,9 +4,7 @@ const parser = new Parser();
 
 function exec() {
     const program = `
-    if(x) {
-        x = 1;
-    }
+    if(x) if(y) {} else {};
     `
     // const program = "'hello'";
     // const program = '  "   hello"';
@@ -26,7 +24,8 @@ const tests = [
     require('./math-test'),
     require('./assign-test'),
     require('./variable-test'),
-    require('./if-test')
+    require('./if-test'),
+    require('./realational-test')
 ];
 
 function test(program, expected) {
