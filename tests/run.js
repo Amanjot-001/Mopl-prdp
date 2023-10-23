@@ -27,7 +27,8 @@ const tests = [
     require('./if-test'),
     require('./relational-test'),
     require('./equality-test'),
-    require('./logical-test')
+    require('./logical-test'),
+    require('./unary-test')
 ];
 
 function test(program, expected) {
