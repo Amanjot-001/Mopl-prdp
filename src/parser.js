@@ -303,7 +303,13 @@ class Parser {
     }
 
     _isLiteral(tokenType) {
-        return tokenType === 'NUMBER' || tokenType === 'STRING';
+        return (
+            tokenType === 'NUMBER' ||
+            tokenType === 'STRING' ||
+            tokenType === 'true' ||
+            tokenType === 'false' ||
+            tokenType === 'null'
+        );
     }
 
     ParenthesizedExpression() {
@@ -319,6 +325,12 @@ class Parser {
                 return this.NumericLiteral();
             case 'STRING':
                 return this.StringLiteral();
+            case 'true' :
+                return this.BooleanLiteral(true);
+            case 'false':
+                return this.BooleanLiteral(false);
+            case 'null':
+                return this.NullLiteral();
         }
         throw new SyntaxError(
             `Unexpected literal production  `
@@ -335,6 +347,22 @@ class Parser {
         const token = this._eat('STRING');
 
         return factory.StringLiteral(token.value.slice(1, -1));
+    }
+
+    BooleanLiteral(value) {
+        this._eat(value ? 'true' : 'false');
+        return {
+            type: 'BooleanLiteral',
+            value
+        };
+    }
+
+    NullLiteral() {
+        this._eat('null');
+        return {
+            type: 'NullLiteral',
+            value: null
+        }
     }
 
     _eat(tokenType) {
