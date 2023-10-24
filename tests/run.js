@@ -4,9 +4,9 @@ const parser = new Parser();
 
 function exec() {
     const program = `
-    while( x > 10) {
+    do {
         x -= 1;
-    };
+    } while(x > 10);
     `
     // const program = "'hello'";
     // const program = '  "   hello"';
@@ -16,7 +16,7 @@ function exec() {
     console.log(JSON.stringify(ast, null, 2));
 }
 
-// exec();
+exec();
 
 const tests = [
     require('./literal-test'),
@@ -30,7 +30,8 @@ const tests = [
     require('./relational-test'),
     require('./equality-test'),
     require('./logical-test'),
-    require('./unary-test')
+    require('./unary-test'),
+    require('./control-test')
 ];
 
 function test(program, expected) {

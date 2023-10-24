@@ -112,6 +112,10 @@ class Parser {
                 return this.VariableStatement();
             case 'if':
                 return this.IfStatement();
+            case 'while':
+            case 'do':
+            case 'for':
+                return this.IterationStatement();
             default :
                 return this.ExpressionStatement();
         }
@@ -129,6 +133,32 @@ class Parser {
         this._eat('}');
 
         return factory.BlockStatement(body);
+    }
+
+    IterationStatement() {
+        switch(this._lookahead.type) {
+            case 'while':
+                return this.WhileStatement();
+            case 'do':
+                return this.DoWhileStatement();
+            case 'for':
+                return this.ForStatement();
+        }
+    }
+
+    WhileStatement() {
+        this._eat('while');
+        this._eat('(');
+        const test = this.Expression();
+        this._eat(')');
+
+        const body = this.Statement();
+
+        return {
+            type: 'WhileStatement',
+            test,
+            body
+        };
     }
 
     IfStatement() {
