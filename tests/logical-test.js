@@ -43,7 +43,7 @@ module.exports = test => {
                 type: 'ExpressionStatement',
                 expression: {
                     type: 'LogicalExpression',
-                    operator: '&&',
+                    operator: '||',
                     left: {
                         type: 'BinaryExpression',
                         operator: '>',

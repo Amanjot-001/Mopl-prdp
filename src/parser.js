@@ -153,7 +153,7 @@ class Parser {
         this._eat(')');
 
         const body = this.Statement();
-
+        this._eat(';')
         return {
             type: 'WhileStatement',
             test,
