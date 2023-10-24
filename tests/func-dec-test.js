@@ -10,7 +10,7 @@ module.exports = test => {
                 type: 'FunctionDeclaration',
                 name: {
                     type: 'Identifier',
-                    name: 'sqaure'
+                    name: 'square'
                 },
                 params: [
                     {
@@ -31,7 +31,7 @@ module.exports = test => {
                                     name: 'x'
                                 },
                                 right: {
-                                    type: 'identifier',
+                                    type: 'Identifier',
                                     name: 'x'
                                 }
                             }

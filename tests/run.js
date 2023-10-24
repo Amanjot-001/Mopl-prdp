@@ -7,8 +7,6 @@ function exec() {
     def square (x) {
         return x*x;
     }
-
-    square(2);
     `;
 
     const ast = parser.parse(program);
@@ -16,7 +14,7 @@ function exec() {
     console.log(JSON.stringify(ast, null, 2));
 }
 
-exec();
+// exec();
 
 const tests = [
     require('./literal-test'),
@@ -42,6 +40,6 @@ function test(program, expected) {
     // console.log('Expected:', expected);
 }
 
-// tests.forEach(testRun => testRun(test))
+tests.forEach(testRun => testRun(test))
 
 console.log('all assertions passed! ')
