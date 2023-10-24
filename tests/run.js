@@ -4,12 +4,12 @@ const parser = new Parser();
 
 function exec() {
     const program = `
-    for (let i = 0; i < 10; i += 1) {
-        x += i;
-      }
-    `
-    // const program = "'hello'";
-    // const program = '  "   hello"';
+    def square(x) {
+        return x*x;
+    }
+
+    square(2);
+    `;
     
     const ast = parser.parse(program);
     
