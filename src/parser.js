@@ -242,10 +242,6 @@ class Parser {
         return tokenType === 'SIMPLE_ASSIGN' || tokenType === 'COMPLEX_ASSIGN';
     }
 
-    LeftHandSideExpression() {
-        return this.Identifier();
-    }
-
     Identifier() {
         const name = this._eat('IDENTIFIER').value;
 
@@ -276,7 +272,7 @@ class Parser {
 
     MultiplicativeExpression() {
         return this._BinaryExpression(
-            'PrimaryExpression',
+            'UnaryExpression',
             'MULTIPLICATIVE_OPERATOR'
         );
     }
@@ -317,12 +313,40 @@ class Parser {
         return left;
     }
 
+    UnaryExpression() {
+        let operator;
+        switch(this._lookahead.type) {
+            case 'ADDITIVE_OPERATOR':
+                operator = this._eat('ADDITIVE_OPERATOR').value;
+                break;
+            case 'LOGICAL_NOT':
+                operator = this._eat('LOGICAL_NOT').value;
+                break;
+        }
+
+        if(operator != null) {
+            return {
+                type: 'UnaryExpression',
+                operator,
+                argument: this.UnaryExpression()
+            };
+        }
+
+        return this.LeftHandSideExpression();
+    }
+
+    LeftHandSideExpression() {
+        return this.PrimaryExpression();
+    }
+
     PrimaryExpression() {
         if(this._isLiteral(this._lookahead.type))
             return this.Literal();
         switch(this._lookahead.type) {
             case '(':
                 return this.ParenthesizedExpression();
+            case 'IDENTIFIER':
+                return this.Identifier();
             default:
                 return this.LeftHandSideExpression();
         }
