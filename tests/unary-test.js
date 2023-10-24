@@ -54,7 +54,7 @@ module.exports = test => {
                         operator: '+',
                         argument: {
                             type: 'NumericLiteral',
-                            name: 10
+                            value: 10
                         }
                     }
                 }

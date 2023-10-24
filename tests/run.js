@@ -30,7 +30,7 @@ const tests = [
     require('./relational-test'),
     require('./equality-test'),
     require('./logical-test'),
-    // require('./unary-test'),
+    require('./unary-test'),
     require('./control-test'),
 ];
 
