@@ -161,6 +161,23 @@ class Parser {
         };
     }
 
+    DoWhileStatement() {
+        this._eat('do');
+        const body = this.Statement();
+        this._eat('while');
+        this._eat('(');
+        const test = this.Expression();
+        this._eat(')');
+
+        this._eat(';')
+
+        return {
+            type: 'WhileStatement',
+            body,
+            test
+        };
+    }
+
     IfStatement() {
         this._eat('if');
         this._eat('(');

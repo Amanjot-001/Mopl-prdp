@@ -16,7 +16,7 @@ function exec() {
     console.log(JSON.stringify(ast, null, 2));
 }
 
-exec();
+// exec();
 
 const tests = [
     require('./literal-test'),
@@ -39,6 +39,6 @@ function test(program, expected) {
     assert.deepEqual(ast, expected);
 }
 
-// tests.forEach(testRun => testRun(test))
+tests.forEach(testRun => testRun(test))
 
 console.log('all assertions passed! ')
