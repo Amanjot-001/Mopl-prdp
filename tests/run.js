@@ -4,9 +4,7 @@ const parser = new Parser();
 
 function exec() {
     const program = `
-    def square (x) {
-        return x*x;
-    }
+    getCallBack()();
     `;
 
     const ast = parser.parse(program);
@@ -14,7 +12,7 @@ function exec() {
     console.log(JSON.stringify(ast, null, 2));
 }
 
-// exec();
+exec();
 
 const tests = [
     require('./literal-test'),
@@ -31,7 +29,8 @@ const tests = [
     require('./unary-test'),
     require('./control-test'),
     require('./func-dec-test'),
-    require('./member-test')
+    require('./member-test'),
+    require('./call-test')
 ];
 
 function test(program, expected) {
