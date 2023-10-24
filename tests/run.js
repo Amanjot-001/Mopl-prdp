@@ -30,7 +30,8 @@ const tests = [
     require('./logical-test'),
     require('./unary-test'),
     require('./control-test'),
-    require('./func-dec-test')
+    require('./func-dec-test'),
+    require('./member-test')
 ];
 
 function test(program, expected) {
