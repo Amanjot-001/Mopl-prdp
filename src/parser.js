@@ -172,7 +172,7 @@ class Parser {
         this._eat(';')
 
         return {
-            type: 'WhileStatement',
+            type: 'DoWhileStatement',
             body,
             test
         };

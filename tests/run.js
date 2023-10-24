@@ -31,12 +31,14 @@ const tests = [
     require('./equality-test'),
     require('./logical-test'),
     // require('./unary-test'),
-    // require('./control-test')
+    require('./control-test'),
 ];
 
 function test(program, expected) {
     const ast = parser.parse(program);
     assert.deepEqual(ast, expected);
+    // console.log('Actual:', ast);
+    // console.log('Expected:', expected);
 }
 
 tests.forEach(testRun => testRun(test))
