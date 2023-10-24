@@ -112,6 +112,10 @@ class Parser {
                 return this.VariableStatement();
             case 'if':
                 return this.IfStatement();
+            case 'def':
+                return this.FunctionDeclaration();
+            case 'return':
+                return this.ReturnStatement();
             case 'while':
             case 'do':
             case 'for':
@@ -133,6 +137,48 @@ class Parser {
         this._eat('}');
 
         return factory.BlockStatement(body);
+    }
+
+    FunctionDeclaration() {
+        this._eat('def');
+        const name = this.Identifier();
+
+        this._eat('(');
+
+        const params = this._lookahead.type !== ')'
+        ? this.FormalParamList() : [];
+
+        this._eat(')');
+
+        const body = this.BlockStatement();
+
+        return {
+            type: 'FunctionDeclaration',
+            name,
+            params,
+            body
+        };
+    }
+
+    FormalParamList() {
+        const params = [];
+
+        do {
+            params.push(this.Identifier());
+        }   while(this._lookahead === ',' && this._eat(','));
+
+        return params;
+    }
+
+    ReturnStatement() {
+        this._eat('return');
+        const argument = this._lookahead.type !== ';' ? this.Expression() : null;
+        this._eat(';');
+
+        return  {
+            type: 'ReturnStatement',
+            argument
+        };
     }
 
     IterationStatement() {

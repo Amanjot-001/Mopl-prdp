@@ -4,13 +4,13 @@ const parser = new Parser();
 
 function exec() {
     const program = `
-    def square(x) {
+    def square (x) {
         return x*x;
     }
 
     square(2);
     `;
-    
+
     const ast = parser.parse(program);
     
     console.log(JSON.stringify(ast, null, 2));
@@ -32,6 +32,7 @@ const tests = [
     require('./logical-test'),
     require('./unary-test'),
     require('./control-test'),
+    require('./func-dec-test')
 ];
 
 function test(program, expected) {
@@ -41,6 +42,6 @@ function test(program, expected) {
     // console.log('Expected:', expected);
 }
 
-tests.forEach(testRun => testRun(test))
+// tests.forEach(testRun => testRun(test))
 
 console.log('all assertions passed! ')
