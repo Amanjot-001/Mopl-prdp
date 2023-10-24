@@ -178,6 +178,10 @@ class Parser {
         };
     }
 
+    ForStatement() {
+        
+    }
+
     IfStatement() {
         this._eat('if');
         this._eat('(');
