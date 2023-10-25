@@ -4,7 +4,7 @@ const parser = new Parser();
 
 function exec() {
     const program = `
-    getCallBack()();
+    let p = new point3d(10,20,30);
     `;
 
     const ast = parser.parse(program);
