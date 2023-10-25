@@ -114,6 +114,8 @@ class Parser {
                 return this.IfStatement();
             case 'def':
                 return this.FunctionDeclaration();
+            case 'class':
+                return this.ClassDeclaration();
             case 'return':
                 return this.ReturnStatement();
             case 'while':
@@ -138,6 +140,32 @@ class Parser {
 
         return factory.BlockStatement(body);
     }
+
+    ClassDeclaration() {
+        this._eat('class');
+
+        const id = this.Identifier();
+
+        const superClass = 
+            this._lookahead.type === 'extends'
+            ? this.ClassExtends()
+            : null;
+        
+        const body = this.BlockStatement();
+
+        return {
+            type: 'Classdeclaration',
+            id,
+            superClass,
+            body
+        };
+    }
+
+    ClassExtends() {
+        this._eat('extends');
+        return this.Identifier();
+    }
+    
 
     FunctionDeclaration() {
         this._eat('def');
