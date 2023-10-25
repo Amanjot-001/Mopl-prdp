@@ -9,7 +9,7 @@ const program = ` 2 + 2;`;
 
 console.log('Program: \n\n', program);
 
-console.log('__________________\n')
+console.log('__________________\n');
 
 console.log('Tokens: \n');
 
@@ -20,4 +20,9 @@ while(token != null) {
     token = tokenizer.getNextToken();
 }
 
-console.log('__________________\n')
+console.log('__________________\n');
+
+let ast = parser.parse(program);
+console.log('AST: \n\n', JSON.stringify(ast, null, 2));
+
+console.log('__________________\n');
