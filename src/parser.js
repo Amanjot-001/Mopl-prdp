@@ -154,7 +154,7 @@ class Parser {
         const body = this.BlockStatement();
 
         return {
-            type: 'Classdeclaration',
+            type: 'ClassDeclaration',
             id,
             superClass,
             body
@@ -498,6 +498,10 @@ class Parser {
     }
 
     CallMemberExpression() {
+        if(this._lookahead.type === 'super') {
+            return this._CallExpression(this.Super());
+        }
+
         const member = this.MemberExpression();
 
         if(this._lookahead.type === '(') {
@@ -580,9 +584,20 @@ class Parser {
                 return this.Identifier();
             case 'this':
                 return this.ThisExpression();
+            case 'new':
+                return this.NewExpression();
             default:
                 return this.LeftHandSideExpression();
         }
+    }
+
+    NewExpression() {
+        this._eat('new');
+        return  {
+            type: 'NewExpression',
+            callee: this.MemberExpression(),
+            arguments: this.Arguments()
+        };
     }
 
     ThisExpression() {

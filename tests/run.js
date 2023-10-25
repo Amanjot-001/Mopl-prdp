@@ -12,7 +12,7 @@ function exec() {
     console.log(JSON.stringify(ast, null, 2));
 }
 
-exec();
+// exec();
 
 const tests = [
     require('./literal-test'),
@@ -30,7 +30,8 @@ const tests = [
     require('./control-test'),
     require('./func-dec-test'),
     require('./member-test'),
-    require('./call-test')
+    require('./call-test'),
+    require('./class-test'),
 ];
 
 function test(program, expected) {

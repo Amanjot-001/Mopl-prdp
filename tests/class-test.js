@@ -2,7 +2,7 @@ module.exports = test => {
     test(
         `
       class Point {
-        def constructor(x, y) {
+        def constructor(x , y) {
           this.x = x;
           this.y = y;
         }
