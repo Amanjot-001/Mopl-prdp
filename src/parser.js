@@ -193,7 +193,7 @@ class Parser {
 
         do {
             params.push(this.Identifier());
-        }   while(this._lookahead === ',' && this._eat(','));
+        }   while(this._lookahead.type === ',' && this._eat(','));
 
         return params;
     }
