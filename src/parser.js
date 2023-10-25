@@ -165,7 +165,7 @@ class Parser {
         this._eat('extends');
         return this.Identifier();
     }
-    
+
 
     FunctionDeclaration() {
         this._eat('def');
@@ -578,9 +578,26 @@ class Parser {
                 return this.ParenthesizedExpression();
             case 'IDENTIFIER':
                 return this.Identifier();
+            case 'this':
+                return this.ThisExpression();
             default:
                 return this.LeftHandSideExpression();
         }
+    }
+
+    ThisExpression() {
+        this._eat('this');
+        return {
+            type: 'ThisExpression',
+        };
+    }
+
+    Super() {
+        this._eat('super');
+
+        return {
+            type: 'Super'
+        };
     }
 
     _isLiteral(tokenType) {
