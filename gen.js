@@ -56,8 +56,6 @@ class Generator {
     }
 
     VariableDeclaration(node) {
-        // console.log(node.id);
-
         const id = this.Expression(node.id);
         const init = this.Expression(node.init);
 
@@ -84,17 +82,17 @@ class Generator {
     }
 
     AssignmentExpression(node) {
-        const identifier = this.Identifier(node.left);
+        const identifier = this.Expression(node.left);
         const operator = node.operator;
-        const right = this.NumericLiteral(node.right);
+        const right = this.Expression(node.right);
 
         return `${identifier} ${operator} ${right};`;
     }
 
     BinaryExpression(node) {
-        const left = this.NumericLiteral(node.left);
+        const left = this.Expression(node.left);
         const operator = node.operator;
-        const right = this.NumericLiteral(node.right);
+        const right = this.Expression(node.right);
 
         return `${left} ${operator} ${right};`;
     }
