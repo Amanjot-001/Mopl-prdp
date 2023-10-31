@@ -23,7 +23,7 @@ class Generator {
             case 'BlockStatement':
                 return this.BlockStatement(node.body);
             case 'VariableStatement':
-                return this.VariableStatement();
+                return this.VariableStatement(node);
             case 'IfStatement':
                 return this.IfStatement();
             case 'FunctionDeclaration':
@@ -51,8 +51,17 @@ class Generator {
         return '\n' + this.StatementList(body).join('\n') + '\n';
     }
 
-    VariableStatement() {
+    VariableStatement(node) {
+        return 'let ' + node.declarations.map(declaration => this.VariableDeclaration(declaration)) + ';';
+    }
 
+    VariableDeclaration(node) {
+        // console.log(node.id);
+
+        const id = this.Expression(node.id);
+        const init = this.Expression(node.init);
+
+        return `${id} = ${init}`;
     }
 
     ExpressionStatement(node) {
@@ -65,6 +74,10 @@ class Generator {
                 return this.BinaryExpression(node);
             case 'AssignmentExpression':
                 return this.AssignmentExpression(node);
+            case 'Identifier':
+                return this.Identifier(node);
+            case 'NumericLiteral':
+                return this.NumericLiteral(node);
             default:
                 return '';
         }
