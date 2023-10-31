@@ -5,7 +5,7 @@ class Generator {
 
     generate(node) {
         if (node.type === "Program") {
-            this.StatementList(node.body);
+            this.code = this.StatementList(node.body);
             return this.code;
         } else {
             throw new Error("Unsupported AST node type: " + node.type);
@@ -13,32 +13,38 @@ class Generator {
     }
 
     StatementList(body) {
-        body.map(statement => this.ExpressionStatement(statement));
+        body.map(statement => this.Statement(statement));
     }
 
     Statement(node) {
         switch (node.type) {
-            case ';':
+            case 'EmptyStatement':
                 return this.EmptyStatement();
-            case '{':
+            case 'BlockStatement':
                 return this.BlockStatement();
-            case 'let':
+            case 'VariableStatement':
                 return this.VariableStatement();
-            case 'if':
+            case 'IfStatement':
                 return this.IfStatement();
-            case 'def':
+            case 'FunctionDeclaration':
                 return this.FunctionDeclaration();
-            case 'class':
+            case 'ClassDeclaration':
                 return this.ClassDeclaration();
-            case 'return':
+            case 'ReturnStatement':
                 return this.ReturnStatement();
-            case 'while':
-            case 'do':
-            case 'for':
+            case 'WhileStatement':
+            case 'DoWhileStatement':
+            case 'ForStatement':
                 return this.IterationStatement();
+            case 'ExpressionStatement':
+                return this.ExpressionStatement()
             default:
-                return this.ExpressionStatement();
+                return '';
         }
+    }
+
+    EmptyStatement(node) {
+        return '';
     }
 
     ExpressionStatement(node) {
