@@ -5,7 +5,7 @@ class Generator {
 
     generate(node) {
         if (node.type === "Program") {
-            this.code = this.StatementList(node.body);
+            this.code = this.StatementList(node.body).join('/n');
             return this.code;
         } else {
             throw new Error("Unsupported AST node type: " + node.type);
@@ -13,7 +13,7 @@ class Generator {
     }
 
     StatementList(body) {
-        body.map(statement => this.Statement(statement));
+        return body.map((statement) => this.Statement(statement));
     }
 
     Statement(node) {
@@ -21,7 +21,7 @@ class Generator {
             case 'EmptyStatement':
                 return this.EmptyStatement();
             case 'BlockStatement':
-                return this.BlockStatement();
+                return this.BlockStatement(node.body);
             case 'VariableStatement':
                 return this.VariableStatement();
             case 'IfStatement':
@@ -37,7 +37,7 @@ class Generator {
             case 'ForStatement':
                 return this.IterationStatement();
             case 'ExpressionStatement':
-                return this.ExpressionStatement()
+                return this.ExpressionStatement(node)
             default:
                 return '';
         }
@@ -45,6 +45,10 @@ class Generator {
 
     EmptyStatement(node) {
         return '';
+    }
+
+    BlockStatement(body) {
+        return '\n' +  this.StatementList(body).join('\n') + '\n';
     }
 
     ExpressionStatement(node) {
@@ -56,9 +60,11 @@ class Generator {
     }
 
     BinaryExpression(node) {
-        this.code += this.NumericLiteral(node.left);
-        this.code += ` ${node.operator} `;
-        this.code += this.NumericLiteral(node.right);
+        const left = this.NumericLiteral(node.left);
+        const operator = node.operator;
+        const right = this.NumericLiteral(node.right);
+
+        return `${left} ${operator} ${right};`;
     }
 
     NumericLiteral(node) {

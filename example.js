@@ -6,7 +6,7 @@ const tokenizer = new Tokenizer();
 const parser = new Parser();
 const generator = new Generator();
 
-const program = `;`;
+const program = `{ 2+2; }`;
 
 console.log('Program: \n\n', program);
 
