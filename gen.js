@@ -48,7 +48,11 @@ class Generator {
     }
 
     BlockStatement(body) {
-        return '\n' +  this.StatementList(body).join('\n') + '\n';
+        return '\n' + this.StatementList(body).join('\n') + '\n';
+    }
+
+    VariableStatement() {
+
     }
 
     ExpressionStatement(node) {
@@ -56,7 +60,22 @@ class Generator {
     }
 
     Expression(node) {
-        return this.BinaryExpression(node);
+        switch (node.type) {
+            case 'BinaryExpression':
+                return this.BinaryExpression(node);
+            case 'AssignmentExpression':
+                return this.AssignmentExpression(node);
+            default:
+                return '';
+        }
+    }
+
+    AssignmentExpression(node) {
+        const identifier = this.Identifier(node.left);
+        const operator = node.operator;
+        const right = this.NumericLiteral(node.right);
+
+        return `${identifier} ${operator} ${right};`;
     }
 
     BinaryExpression(node) {
@@ -65,6 +84,10 @@ class Generator {
         const right = this.NumericLiteral(node.right);
 
         return `${left} ${operator} ${right};`;
+    }
+
+    Identifier(node) {
+        return node.name;
     }
 
     NumericLiteral(node) {
