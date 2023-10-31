@@ -76,6 +76,8 @@ class Generator {
                 return this.Identifier(node);
             case 'NumericLiteral':
                 return this.NumericLiteral(node);
+            case 'StringLiteral':
+                return this.StringLiteral(node);
             default:
                 return '';
         }
@@ -103,6 +105,10 @@ class Generator {
 
     NumericLiteral(node) {
         return node.value.toString();
+    }
+
+    StringLiteral(node) {
+        return `'${node.value}'`;
     }
 }
 
