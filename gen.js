@@ -31,7 +31,7 @@ class Generator {
             case 'ClassDeclaration':
                 return this.ClassDeclaration();
             case 'ReturnStatement':
-                return this.ReturnStatement();
+                return this.ReturnStatement(node);
             case 'WhileStatement':
             case 'DoWhileStatement':
             case 'ForStatement':
@@ -39,7 +39,7 @@ class Generator {
             case 'ExpressionStatement':
                 return this.ExpressionStatement(node)
             default:
-                return '';
+                return this.Expression(node);
         }
     }
 
@@ -77,6 +77,12 @@ class Generator {
         const alternate = node.alternate ? this.Statement(node.alternate) : '';
 
         return `if (${test}) {\n${consequent}\n}\n${alternate}`
+    }
+
+    ReturnStatement(node) {
+        const argument = this.Statement(node.argument);
+
+        return `return ${argument}`;
     }
 
     ExpressionStatement(node) {

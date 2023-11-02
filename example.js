@@ -8,6 +8,7 @@ const generator = new Generator();
 
 const program = `def square(x) {
     let y= 5;
+    return y;
 }`;
 
 console.log('Program: \n\n', program);
