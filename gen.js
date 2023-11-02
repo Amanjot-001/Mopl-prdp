@@ -90,6 +90,13 @@ class Generator {
         return `while(${test}) {\n${body}\n;}`
     }
 
+    DoWhileStatment(node) {
+        const body = this.Statement(node.body);
+        const test = this.Expression(node.test);
+
+        return `do{\n${body}\n} while(${test});`
+    }
+
     IfStatement(node) {
         const test = this.Expression(node.test);
         console.log(node.consequent.body)

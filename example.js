@@ -7,9 +7,9 @@ const parser = new Parser();
 const generator = new Generator();
 
 const program = ` let x = 5;
-    while(x == 5) {
+    do{
     x += 1;
-    };
+    }while(x == 5);
 `;
 
 console.log('Program: \n\n', program);
