@@ -6,11 +6,10 @@ const tokenizer = new Tokenizer();
 const parser = new Parser();
 const generator = new Generator();
 
-const program = `def square(x) {
-    let y= 5;
-    return y;
-}
-square(4);
+const program = ` let x = 5;
+    while(x == 5) {
+    x += 1;
+    };
 `;
 
 console.log('Program: \n\n', program);

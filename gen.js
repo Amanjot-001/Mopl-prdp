@@ -35,7 +35,7 @@ class Generator {
             case 'WhileStatement':
             case 'DoWhileStatement':
             case 'ForStatement':
-                return this.IterationStatement();
+                return this.IterationStatement(node);
             case 'ExpressionStatement':
                 return this.ExpressionStatement(node)
             default:
@@ -68,6 +68,26 @@ class Generator {
         const body = this.Statement(node.body);
 
         return `function ${name} (${params}) {\n${body}\n}`;
+    }
+
+    IterationStatement(node) {
+        switch(node.type) {
+            case 'WhileStatement':
+                return this.WhileStatment(node);
+            case 'DoWhileStatement':
+                return this.DoWhileStatment(node);
+            case 'ForStatement':
+                return this.ForStatement(node);
+            default:
+                return '';
+        }
+    }
+
+    WhileStatment(node) {
+        const test = this.Expression(node.test);
+        const body = this.Statement(node.body);
+
+        return `while(${test}) {\n${body}\n;}`
     }
 
     IfStatement(node) {
@@ -128,7 +148,7 @@ class Generator {
         const operator = node.operator;
         const right = this.Expression(node.right);
 
-        return `${left} ${operator} ${right};`;
+        return `${left} ${operator} ${right}`;
     }
 
     Identifier(node) {
