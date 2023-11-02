@@ -6,10 +6,8 @@ const tokenizer = new Tokenizer();
 const parser = new Parser();
 const generator = new Generator();
 
-const program = `if(x = 5) {
-    let y = 1;
-} else {
-    let z=2;
+const program = `def square(x) {
+    let y= 5;
 }`;
 
 console.log('Program: \n\n', program);

@@ -27,7 +27,7 @@ class Generator {
             case 'IfStatement':
                 return this.IfStatement(node);
             case 'FunctionDeclaration':
-                return this.FunctionDeclaration();
+                return this.FunctionDeclaration(node);
             case 'ClassDeclaration':
                 return this.ClassDeclaration();
             case 'ReturnStatement':
@@ -60,6 +60,14 @@ class Generator {
         const init = this.Expression(node.init);
 
         return `${id} = ${init}`;
+    }
+
+    FunctionDeclaration(node) {
+        const name = this.Identifier(node.name);
+        const params = node.params.map(param => this.Expression(param)).join('\n');
+        const body = this.Statement(node.body);
+
+        return `function ${name} (${params}) {\n${body}\n}`;
     }
 
     IfStatement(node) {
