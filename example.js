@@ -9,7 +9,9 @@ const generator = new Generator();
 const program = `def square(x) {
     let y= 5;
     return y;
-}`;
+}
+square(4);
+`;
 
 console.log('Program: \n\n', program);
 

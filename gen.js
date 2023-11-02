@@ -5,7 +5,7 @@ class Generator {
 
     generate(node) {
         if (node.type === "Program") {
-            this.code = this.StatementList(node.body).join('/n');
+            this.code = this.StatementList(node.body).join('\n');
             return this.code;
         } else {
             throw new Error("Unsupported AST node type: " + node.type);
@@ -101,9 +101,18 @@ class Generator {
                 return this.NumericLiteral(node);
             case 'StringLiteral':
                 return this.StringLiteral(node);
+            case 'CallExpression':
+                return this.CallExpression(node);
             default:
                 return '';
         }
+    }
+
+    CallExpression(node) {
+        const callee = this.Identifier(node.callee);
+        const argumentList = node.arguments.map(argument => this.Expression(argument)).join('\n');
+
+        return `${callee}(${argumentList});`
     }
 
     AssignmentExpression(node) {
