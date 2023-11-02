@@ -25,7 +25,7 @@ class Generator {
             case 'VariableStatement':
                 return this.VariableStatement(node);
             case 'IfStatement':
-                return this.IfStatement();
+                return this.IfStatement(node);
             case 'FunctionDeclaration':
                 return this.FunctionDeclaration();
             case 'ClassDeclaration':
@@ -52,7 +52,7 @@ class Generator {
     }
 
     VariableStatement(node) {
-        return 'let ' + node.declarations.map(declaration => this.VariableDeclaration(declaration)) + ';';
+        return 'let ' + node.declarations.map(declaration => this.VariableDeclaration(declaration));
     }
 
     VariableDeclaration(node) {
@@ -60,6 +60,15 @@ class Generator {
         const init = this.Expression(node.init);
 
         return `${id} = ${init}`;
+    }
+
+    IfStatement(node) {
+        const test = this.Expression(node.test);
+        console.log(node.consequent.body)
+        const consequent = node.consequent.body.map(statements => this.Statement(statements)).join('\n');
+        const alternate = node.alternate ? this.Statement(node.alternate) : '';
+
+        return `if (${test}) {\n${consequent}\n}\n${alternate}`
     }
 
     ExpressionStatement(node) {
@@ -88,7 +97,7 @@ class Generator {
         const operator = node.operator;
         const right = this.Expression(node.right);
 
-        return `${identifier} ${operator} ${right};`;
+        return `${identifier} ${operator} ${right}`;
     }
 
     BinaryExpression(node) {

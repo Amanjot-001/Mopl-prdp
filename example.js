@@ -6,7 +6,11 @@ const tokenizer = new Tokenizer();
 const parser = new Parser();
 const generator = new Generator();
 
-const program = `let x = 'hello';`;
+const program = `if(x = 5) {
+    let y = 1;
+} else {
+    let z=2;
+}`;
 
 console.log('Program: \n\n', program);
 
