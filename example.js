@@ -6,9 +6,7 @@ const tokenizer = new Tokenizer();
 const parser = new Parser();
 const generator = new Generator();
 
-const program = ` for(; ;) {
-    let y = 'hello';
-}
+const program = `x < 5
 `;
 
 console.log('Program: \n\n', program);

@@ -71,7 +71,7 @@ class Generator {
     }
 
     IterationStatement(node) {
-        switch(node.type) {
+        switch (node.type) {
             case 'WhileStatement':
                 return this.WhileStatment(node);
             case 'DoWhileStatement':
@@ -138,6 +138,10 @@ class Generator {
                 return this.StringLiteral(node);
             case 'CallExpression':
                 return this.CallExpression(node);
+            case 'BooleanLiteral':
+                return this.BooleanLiteral(node);
+            case 'NullLiteral':
+                return this.NullLiteral(node);
             default:
                 return '';
         }
@@ -176,6 +180,14 @@ class Generator {
 
     StringLiteral(node) {
         return `'${node.value}'`;
+    }
+
+    BooleanLiteral(node) {
+        return `${node.value}`;
+    }
+
+    NullLiteral(node) {
+        return `${node.value}`;
     }
 }
 
