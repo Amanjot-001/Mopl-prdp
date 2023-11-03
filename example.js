@@ -6,7 +6,7 @@ const tokenizer = new Tokenizer();
 const parser = new Parser();
 const generator = new Generator();
 
-const program = `x > 5 && y < 10;
+const program = `!10;
 `;
 
 console.log('Program: \n\n', program);

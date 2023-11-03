@@ -138,6 +138,8 @@ class Generator {
                 return this.StringLiteral(node);
             case 'LogicalExpression':
                 return this.LogicalExpression(node);
+            case 'UnaryExpression':
+                return this.UnaryExpression(node);
             case 'CallExpression':
                 return this.CallExpression(node);
             case 'BooleanLiteral':
@@ -178,6 +180,13 @@ class Generator {
         const right = this.Expression(node.right);
 
         return `${left} ${operator} ${right}`;
+    }
+
+    UnaryExpression(node) {
+        const operator = node.operator;
+        const argument = this.Expression(node.argument);
+
+        return `${operator}${argument}`;
     }
 
     Identifier(node) {
