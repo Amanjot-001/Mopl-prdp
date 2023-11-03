@@ -142,6 +142,8 @@ class Generator {
                 return this.UnaryExpression(node);
             case 'CallExpression':
                 return this.CallExpression(node);
+            case 'MemberExpression':
+                return this.MemberExpression(node);
             case 'BooleanLiteral':
                 return this.BooleanLiteral(node);
             case 'NullLiteral':
@@ -187,6 +189,13 @@ class Generator {
         const argument = this.Expression(node.argument);
 
         return `${operator}${argument}`;
+    }
+
+    MemberExpression(node) {
+        const object = this.Expression(node.object);
+        const property = this.Expression(node.property);
+
+        return node.computed ? `${object}[${property}];` : `${object}.${property}`;
     }
 
     Identifier(node) {
