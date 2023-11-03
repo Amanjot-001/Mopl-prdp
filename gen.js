@@ -136,6 +136,8 @@ class Generator {
                 return this.NumericLiteral(node);
             case 'StringLiteral':
                 return this.StringLiteral(node);
+            case 'LogicalExpression':
+                return this.LogicalExpression(node);
             case 'CallExpression':
                 return this.CallExpression(node);
             case 'BooleanLiteral':
@@ -165,6 +167,14 @@ class Generator {
     BinaryExpression(node) {
         const left = this.Expression(node.left);
         const operator = node.operator;
+        const right = this.Expression(node.right);
+
+        return `${left} ${operator} ${right}`;
+    }
+
+    LogicalExpression(node) {
+        const operator = node.operator;
+        const left = this.Expression(node.left);
         const right = this.Expression(node.right);
 
         return `${left} ${operator} ${right}`;
