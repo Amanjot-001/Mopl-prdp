@@ -97,9 +97,17 @@ class Generator {
         return `do{\n${body}\n} while(${test});`
     }
 
+    ForStatement(node) {
+        const init = node.init ? this.Statement(node.init) : '';
+        const test = node.test ? this.Expression(node.test) : '';
+        const update = node.update ? this.Expression(node.update) : '';
+        const body = this.Statement(node.body);
+
+        return `for(${init}; ${test}; ${update}) {\n${body}\n}`;
+    }
+
     IfStatement(node) {
         const test = this.Expression(node.test);
-        console.log(node.consequent.body)
         const consequent = node.consequent.body.map(statements => this.Statement(statements)).join('\n');
         const alternate = node.alternate ? this.Statement(node.alternate) : '';
 
